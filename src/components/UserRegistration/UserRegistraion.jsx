@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import axios from 'axios';
 import Form from 'react-bootstrap/Form';
-import { FloatingLabel } from 'react-bootstrap/';
+import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Button from 'react-bootstrap/Button';
 import useForm from '../UseForm/UseForm';
 import { useNavigate } from 'react-router-dom';
@@ -23,38 +23,44 @@ const UserRegistration = (props) => {
     return (
         <div>
         <Form onSubmit= {handleSubmit}>
-                <Form.Group  controlId="formBasicEmail">
-                  <Form.Label>User Name</Form.Label>
+                <Form.Group >
+                  <FloatingLabel label="User Name" className="mb-3" controlId="floatingTextarea">
                   <Form.Control type="username" name="username" placeholder="Enter User Name Here" onChange= {handleChange} required= {true}/>
+                  </FloatingLabel>
 
                 </Form.Group>
 
-                <Form.Group  controlId="formBasicPassword">
-                  <Form.Label>Password</Form.Label>
+                <Form.Group className="mb-3" controlId="floatingPassword">
+                  <FloatingLabel label="">Password
                   <Form.Control type="password" name="password" placeholder="Password" onChange= {handleChange} required= {true}/>
+                  </FloatingLabel>
                 </Form.Group>
 
-                <Form.Group  controlId="formBasicEmail">
-                  <FloatingLabel>Email</FloatingLabel>
+                <Form.Group >
+                  <FloatingLabel label="Email" className="mb-3" controlId="formBasicEmail">
                   <Form.Control type="email" name="email" placeholder="name@example.com" onChange= {handleChange} required= {true}/>
+                  </FloatingLabel>
 
                 </Form.Group>
 
-                <Form.Group  controlId="formBasicEmail">
-                  <Form.Label>First Name</Form.Label>
+                <Form.Group className="mb-3" controlId="floatingTextarea">
+                  <FloatingLabel label="First Name">
                   <Form.Control type="text" name="first_name" placeholder="Enter First Name" onChange= {handleChange} required= {true}/>
+                  </FloatingLabel>
 
                 </Form.Group>
 
-                <Form.Group  controlId="formBasicEmail">
-                  <Form.Label>Last Name</Form.Label>
+                <Form.Group className="mb-3" controlId="floatingTextarea">
+                  <FloatingLabel label="Last Name">Last Name
                   <Form.Control type="text" name="last_name" placeholder="Enter Last Name" onChange= {handleChange} required= {true}/>
+                  </FloatingLabel>
 
                 </Form.Group>
 
-                <Form.Group  controlId="formBasicEmail">
-                  <Form.Label>Middle Name</Form.Label>
+                <Form.Group className="mb-3" controlId="floatingTextarea">
+                  <FloatingLabel label="Middle Name">
                   <Form.Control type="text" name="middle_name" placeholder="Enter Middle Name" onChange= {handleChange} required= {true}/>
+                  </FloatingLabel>
 
                 </Form.Group>
 

@@ -7,16 +7,16 @@ import useForm from '../UseForm/UseForm';
 import { useNavigate } from 'react-router-dom';
 
 
-const OwnerLogin = (props) => {
+const EmployeeRegister = (props) => {
 
-    const {formValues, handleChange, handleSubmit } = useForm(OwnerRegister);
+    const {formValues, handleChange, handleSubmit } = useForm(RegisterAsAnEmployee);
     
     let navigate= useNavigate();
-
-    async function OwnerRegister() { 
-        let response = await axios.post('http://127.0.0.1:8000/api/auth/register/', formValues);
+    //Add Bearer Token For Authentication
+    async function RegisterAsAnEmployee() { 
+        let response = await axios.post('http://127.0.0.1:8000/employees/', formValues);
         console.log(response.data)
-        navigate("../Owner/Login")
+        navigate("../Employee/Login")
     }  
 
    
@@ -24,25 +24,29 @@ const OwnerLogin = (props) => {
     return (
         <div>
         <Form onSubmit= {handleSubmit}>
+            
+                <Form.Group >
+                  <FloatingLabel className="mb-3" label="User Name" controlId="floatingTextarea">
+                  <Form.Control type="username" name="username" placeholder="Enter UserName" onChange= {handleChange} required= {true}/>
+                  </FloatingLabel>
+                </Form.Group> 
 
-                <Form.Group  controlId="formBasicEmail">
-                  <Form.Label>User Name</Form.Label>
-                  <Form.Control type="username" name="username" placeholder="Enter User Name Here" onChange= {handleChange} required= {true}/>
-                </Form.Group>
-
-                <Form.Group  controlId="formBasicPassword">
-                  <Form.Label>Password</Form.Label>
+                <Form.Group >
+                  <FloatingLabel className="mb-3" label="Password" controlId="floatingPassword">
                   <Form.Control type="password" name="password" placeholder="Password" onChange= {handleChange} required= {true}/>
+                  </FloatingLabel>
                 </Form.Group>  
 
                 <Form.Group  controlId="formBasicEmail">
-                  <Form.Label>First Name</Form.Label>
+                <FloatingLabel label="First Name" className="mb-3" controlId="floatingTextarea">
                   <Form.Control type="text" name="first_name" placeholder="Enter First Name" onChange= {handleChange} required= {true}/>
+                  </FloatingLabel>
                 </Form.Group>
 
                 <Form.Group  controlId="formBasicEmail">
-                  <Form.Label>Last Name</Form.Label>
+                <FloatingLabel label="Last Name" className="mb-3" controlId="floatingTextarea">
                   <Form.Control type="text" name="last_name" placeholder="Enter Last Name" onChange= {handleChange} required= {true}/>
+                  </FloatingLabel>
                 </Form.Group>
 
                 
@@ -55,4 +59,4 @@ const OwnerLogin = (props) => {
     );
 }
 
-export default OwnerLogin;
+export default EmployeeRegister;

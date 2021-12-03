@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import './App.css';
 import UserLogin from './components/UserLogin/UserLogin';
 import UserRegistration from './components/UserRegistration/UserRegistraion';
-import {Router, Routes, Route} from 'react-router-dom'
+import { Routes, Route} from 'react-router-dom'
 import NavBar from './components/NavBar/NavBar';
 import HomeScreen from './components/HomeScreen/HomeScreen';
 import OwnerAndEmployeeRouting from './components/OwnerAndEmployeeRouting/OwnerAndEmployeeRouting';
-import OwnerLogin from './components/OwnerLogin/OwnerLogin';
-import EmployeeLogin from './components/EmployeeLogin/EmployeeLogin';
+import OwnerLogin from './components/OwnerRegister/OwnerRegister';
+import EmployeeLogin from './components/EmployeeRegister/EmployeeRegister';
 
 
 
