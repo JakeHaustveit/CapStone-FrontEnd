@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button';
 import useForm from '../UseForm/UseForm';
 import { useNavigate } from 'react-router-dom';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
+import './UserLogin.css'
 
 
 const UserLogin = (props) => {
@@ -23,10 +24,10 @@ const UserLogin = (props) => {
    
 
     return (
-        <div>
-        <Form onSubmit= {handleSubmit}>
-                <Form.Group >
-                  <FloatingLabel className="mb-3" label="User Name" controlId="floatingTextarea">
+        <div  className="Form">
+        <Form  onSubmit= {handleSubmit}>
+                <Form.Group  >
+                  <FloatingLabel className="mb-3"  label="User Name" controlId="floatingTextarea">
                   <Form.Control type="username" name="username" placeholder="Enter UserName" onChange= {handleChange} required= {true}/>
                   </FloatingLabel>
 

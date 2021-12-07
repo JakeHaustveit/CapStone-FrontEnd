@@ -8,18 +8,18 @@ import { useNavigate } from 'react-router-dom';
 
 
 
-const OwnerRegister = (props) => {
+const OwnerLogin = (props) => {
 
-    const {formValues, handleChange, handleSubmit } = useForm(RegisterAsAnOwner);
+    const {formValues, handleChange, handleSubmit } = useForm(LogInAsAnOwner);
     
     let navigate= useNavigate();
     
-    async function RegisterAsAnOwner() { 
+    async function LogInAsAnOwner() { 
       const jwt = localStorage.getItem('token');
       
         let response = await axios.post('http://127.0.0.1:8000/owners/', formValues, { headers: {Authorization: 'Bearer ' + jwt}});
         console.log(response.data)
-        navigate("../Owner/Login")
+        navigate("../Owner/Home")
     }  
 
    
@@ -61,4 +61,4 @@ const OwnerRegister = (props) => {
     );
 }
 
-export default OwnerRegister;
+export default OwnerLogin;

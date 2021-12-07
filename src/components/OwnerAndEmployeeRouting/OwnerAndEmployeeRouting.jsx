@@ -9,8 +9,9 @@ const OwnerAndEmployeeRouting = () => {
     return (  
         <div>
             <h3>Thank you for Registering</h3>
-                <Button  onClick={()=> navigate("../OwnerRegistration")}>Click Here to Register and an Owner</Button>
-                <Button onClick={()=> navigate("../EmployeeRegistration")}>Click Here to Register and an Employee</Button>
+                <Button  onClick={()=> navigate("../Owner/Registration")}>Click Here to Register and an Owner</Button>
+                <Button onClick={()=> navigate("../Employee/Registration")}>Click Here to Register and an Employee</Button>
+            <h3>If already Registered, sign in Here</h3>
 
         </div>
     

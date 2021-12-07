@@ -51,7 +51,7 @@ const UserRegistration = (props) => {
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="floatingTextarea">
-                  <FloatingLabel label="Last Name">Last Name
+                  <FloatingLabel label="Last Name">
                   <Form.Control type="text" name="last_name" placeholder="Enter Last Name" onChange= {handleChange} required= {true}/>
                   </FloatingLabel>
 
