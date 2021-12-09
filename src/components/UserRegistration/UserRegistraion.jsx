@@ -1,27 +1,28 @@
-import React from 'react';
+import React, {useState} from 'react';
 import axios from 'axios';
 import Form from 'react-bootstrap/Form';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Button from 'react-bootstrap/Button';
 import useForm from '../UseForm/UseForm';
 import { useNavigate } from 'react-router-dom';
+import { Col, Row, Container } from "react-bootstrap";
 
 const UserRegistration = (props) => {
 
     const {formValues, handleChange, handleSubmit } = useForm(Register);
     
+        
     let navigate= useNavigate();
 
-    async function Register() { 
+    async function Register(props) { 
         let response = await axios.post('http://127.0.0.1:8000/api/auth/register/', formValues);
         console.log(response.data)
-        navigate("../Login")
+        
     }  
-
-   
 
     return (
         <div>
+          <Container>
         <Form onSubmit= {handleSubmit}>
                 <Form.Group >
                   <FloatingLabel label="User Name" className="mb-3" controlId="floatingTextarea">
@@ -64,10 +65,28 @@ const UserRegistration = (props) => {
 
                 </Form.Group>
 
+                <Form.Group className="mb-3" controlId="floatingTextarea">
+                  <FloatingLabel label="Business Name">
+                  <Form.Control type="text" name="business_name" placeholder="Enter Business Name" onChange= {handleChange} required= {true}/>
+                  </FloatingLabel>
+
+                </Form.Group>
+
+                <Form.Group>
+                  <FloatingLabel controlId="floatingSelect" label="Select Status" >
+                    <Form.Select  type="test" name="is_staff" onChange= {handleChange} required= {true}>
+                      <option>Select Job Code Here</option>
+                      <option value="False">Owner</option>
+                      <option value="True">Employee</option>
+                    </Form.Select>
+                  </FloatingLabel>                  
+                </Form.Group>
+
                 <Button variant="primary" type="submit" >
                   Submit
                 </Button>
             </Form>
+            </Container>
         </div>
     );
 }

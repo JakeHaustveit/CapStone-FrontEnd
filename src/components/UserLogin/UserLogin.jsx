@@ -6,6 +6,7 @@ import useForm from '../UseForm/UseForm';
 import { useNavigate } from 'react-router-dom';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import './UserLogin.css'
+import { Col, Row, Container } from "react-bootstrap";
 
 
 const UserLogin = (props) => {
@@ -25,6 +26,8 @@ const UserLogin = (props) => {
 
     return (
         <div  className="Form">
+          <Container>
+            <Row>
         <Form  onSubmit= {handleSubmit}>
                 <Form.Group  >
                   <FloatingLabel className="mb-3"  label="User Name" controlId="floatingTextarea">
@@ -43,6 +46,8 @@ const UserLogin = (props) => {
                   Submit
                 </Button>
             </Form>
+            </Row>
+            </Container>
         </div>
     );
 }

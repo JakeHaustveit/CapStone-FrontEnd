@@ -30,7 +30,7 @@ function App() {
 
   useEffect(() =>{
     getEmployeeJObs()
-  },[jobList])
+  },[])
 
   // API Calls
 
@@ -45,6 +45,15 @@ function App() {
     setJobList(response.data)
   }
 
+  const addEmployeeWorkDay = async () => {
+
+    const jwt = localStorage.getItem('token');
+
+    let response = await axios.post('http://127.0.0.1:8000/employees/addwork/', { headers: {Authorization: 'Bearer ' + jwt}})
+  }
+
+  
+
 
 
   return (
@@ -55,10 +64,8 @@ function App() {
           <Route path="/Registration" element= {<UserRegistration /> } />
           <Route path="/Login" element= {<UserLogin /> } />
           <Route path="/RegisterRole" element ={<OwnerAndEmployeeRouting />} />
-          <Route path="/Owner/Registration" element = {<OwnerRegister /> } />
-          <Route path="/Employee/Registration" element = {<EmployeeRegister employeeJobs={jobList}/>} />
-          <Route path="/Owner/Login" element = {<OwnerLogin /> } />
-          <Route path="/Employee/Login" element = {<EmployeeLogin />} />
+          <Route path="/Registration/Owner" element = {<OwnerRegister /> } />
+          <Route path="/Registration/Employee" element = {<EmployeeRegister employeeJobs={jobList}/>} />    
           <Route path="/Owner/Home" element = {<OwnerHome /> } />
           <Route path="/Employee/Home" element = {<EmployeeHome employeeJobs={jobList}/>} />
         </Routes>   

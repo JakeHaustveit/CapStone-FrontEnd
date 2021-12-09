@@ -5,6 +5,7 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Button from 'react-bootstrap/Button';
 import useForm from '../UseForm/UseForm';
 import { useNavigate } from 'react-router-dom';
+import { Col, Row, Container } from "react-bootstrap";
 
 
 
@@ -26,6 +27,7 @@ const OwnerRegister = (props) => {
 
     return (
         <div>
+          <Container>
         <Form onSubmit= {handleSubmit}>
 
                 <Form.Group  >
@@ -33,7 +35,7 @@ const OwnerRegister = (props) => {
                     <Form.Control type="text" name="business_name" placeholder="Enter Business Name Here" onChange= {handleChange} required= {true}/>
                   </FloatingLabel>
                 </Form.Group>
-                
+
                 <Form.Group >
                   <FloatingLabel className="mb-3" label="User Name" controlId="floatingTextarea">
                   <Form.Control type="username" name="username" placeholder="Enter UserName" onChange= {handleChange} required= {true}/>
@@ -57,6 +59,7 @@ const OwnerRegister = (props) => {
                   Submit
                 </Button>
             </Form>
+            </Container>
         </div>
     );
 }
