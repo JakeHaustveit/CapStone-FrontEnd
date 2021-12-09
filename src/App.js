@@ -5,11 +5,6 @@ import UserRegistration from './components/UserRegistration/UserRegistraion';
 import { Routes, Route} from 'react-router-dom'
 import NavBar from './components/NavBar/NavBar';
 import HomeScreen from './components/HomeScreen/HomeScreen';
-import OwnerAndEmployeeRouting from './components/OwnerAndEmployeeRouting/OwnerAndEmployeeRouting';
-import OwnerRegister from './components/OwnerRegister/OwnerRegister';
-import EmployeeRegister from './components/EmployeeRegister/EmployeeRegister';
-import OwnerLogin from './components/OwnerLogin/OwnerLogin';
-import EmployeeLogin from './components/EmployeeLogin/EmployeeLogin';
 import EmployeeHome from './components/EmployeeHome/EmployeeHome';
 import OwnerHome from './components/OwnerHome/OwnerHome';
 import axios from 'axios';
@@ -23,7 +18,7 @@ function App() {
   // Hooks
 
   const [jobList, setJobList] = useState("")
-  const [userId, setUserId] = useState("")
+  const [userInfo, setUserInfo] = useState("")
 
 
   // Use Effects
@@ -52,20 +47,25 @@ function App() {
     let response = await axios.post('http://127.0.0.1:8000/employees/addwork/', { headers: {Authorization: 'Bearer ' + jwt}})
   }
 
+  // Log out 
+
+  const logOut = ()=>{
+    localStorage.removeItem("token");
+    setUserInfo({})
+    console.log("logged user out")
+  }
+
   
 
 
 
   return (
     <div>   
-        <NavBar />
+        <NavBar logOutUser={logOut} />
         <Routes>
           <Route path="/" element= {<HomeScreen /> } />
           <Route path="/Registration" element= {<UserRegistration /> } />
-          <Route path="/Login" element= {<UserLogin /> } />
-          <Route path="/RegisterRole" element ={<OwnerAndEmployeeRouting />} />
-          <Route path="/Registration/Owner" element = {<OwnerRegister /> } />
-          <Route path="/Registration/Employee" element = {<EmployeeRegister employeeJobs={jobList}/>} />    
+          <Route path="/Login" element= {<UserLogin userData={setUserInfo}/> } />              
           <Route path="/Owner/Home" element = {<OwnerHome /> } />
           <Route path="/Employee/Home" element = {<EmployeeHome employeeJobs={jobList}/>} />
         </Routes>   

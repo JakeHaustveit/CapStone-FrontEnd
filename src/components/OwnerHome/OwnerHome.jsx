@@ -1,24 +1,47 @@
 import React from "react";
-import useForm from "../UseForm/UseForm";
+import axios from 'axios';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import useForm from '../UseForm/UseForm';
+import { useNavigate } from 'react-router-dom';
+import FloatingLabel from 'react-bootstrap/FloatingLabel';
+import './OwnerHome.css'
+import { Col, Row, Container } from "react-bootstrap";
+import useForm2 from "../UseForm/UseForm2";
 
 const OwnerHome = () => {
 
-    const {formValues, handleChange, handleSubmit } = useForm(OwnerFormSubmit);
+    const {formValues, handleChange, handleSubmit } = useForm(OwnerAddJobsFormSubmit);
+    const {formValues2, handleChange2, handleSubmit2} = useForm2(OwnerEmployeeLaborCodeFormSubmit);
+    let navigate= useNavigate();
 
 
-    async function OwnerFormSubmit() { 
+    async function OwnerAddJobsFormSubmit() { 
         const jwt = localStorage.getItem('token');
         
-          let response = await axios.post('http://127.0.0.1:8000/owners/', formValues, { headers: {Authorization: 'Bearer ' + jwt}});
-          console.log(response.data)
-          navigate("../Owner/Home")
-      }
+        let response = await axios.post('http://127.0.0.1:8000/owners/registerjobs/', formValues, { headers: {Authorization: 'Bearer ' + jwt}});
+        console.log(response.data)
+        navigate("../Owner/Home")
+    }
+
+
+    async function OwnerEmployeeLaborCodeFormSubmit() { 
+        const jwt = localStorage.getItem('token');
+        
+        let response = await axios.post('http://127.0.0.1:8000/owners/registerjobs/', formValues2, { headers: {Authorization: 'Bearer ' + jwt}});
+        console.log(response.data)
+        navigate("../Owner/Home")
+    }
+
+
+
 
     return(
-    <div>
-            <Container>
-                <Col md={3}>                    
-                    <Form onSubmit= {handleSubmit}>
+    <div className="Form">
+            <Container className="Container">
+                <Col md={3} className="Container">
+                    <h3> Add Jobs Here </h3>                    
+                    <Form onSubmit= {handleSubmit2}>
 
                         <Form.Group >
                             <FloatingLabel label="Job Name" className="mb-3" controlId="floatingTextarea">
@@ -56,11 +79,11 @@ const OwnerHome = () => {
 
                     </Form>
                 </Col>
-                <Col>
-                    <Form onSubmit= {handleSubmit}>
+                <Col className="Container">
+                    <Form onSubmit= {handleSubmit2}>
                         <Form.Group >
                             <FloatingLabel label="Employee Roles" className="mb-3" controlId="floatingTextarea">
-                                <Form.Control type="text" name="labor_code" placeholder="Add Employee Roles Here" onChange= {handleChange} required= {true}/>
+                                <Form.Control type="text" name="labor_code" placeholder="Add Employee Roles Here" onChange= {handleChange2} required= {true}/>
                             </FloatingLabel>
                         </Form.Group>
 
