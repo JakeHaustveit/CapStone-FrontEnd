@@ -19,8 +19,10 @@ const OwnerHome = (props) => {
     // Adds jobs 
     async function OwnerAddJobsFormSubmit() { 
         const jwt = localStorage.getItem('token');
+        console.log(formValues)
         
-        let response = await axios.post(`http://127.0.0.1:8000/owners/registerjobs/${formValues}/`, { headers: {Authorization: 'Bearer ' + jwt}});
+        let response = await axios.post(`http://127.0.0.1:8000/owners/registerjobs/`, { headers: {Authorization: 'Bearer ' + jwt},
+            business_name: formValues.business_name, job_site: formValues.job_site, job_name: formValues.job_name, job_start_date: formValues.job_start_date, job_end_date: formValues.job_end_date });
         console.log(response.data)
         
     }
@@ -67,7 +69,7 @@ const OwnerHome = (props) => {
 
                         <Form.Group >
                             <FloatingLabel label="Start Date" className="mb-3" controlId="floatingTextarea">
-                                <Form.Control type="date" name="job_end_date"  onChange= {handleChange} required= {true}/>
+                                <Form.Control type="date" name="job_start_date"  onChange= {handleChange} required= {true}/>
                             </FloatingLabel>
                         </Form.Group>
 
