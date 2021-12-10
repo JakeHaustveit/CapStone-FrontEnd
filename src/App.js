@@ -8,6 +8,9 @@ import HomeScreen from './components/HomeScreen/HomeScreen';
 import EmployeeHome from './components/EmployeeHome/EmployeeHome';
 import OwnerHome from './components/OwnerHome/OwnerHome';
 import axios from 'axios';
+import Calendar from './components/Calendar/Calendar';
+
+
 
 
 
@@ -19,19 +22,34 @@ function App() {
 
   const [jobList, setJobList] = useState("")
   const [userInfo, setUserInfo] = useState("")
+  const [allEmployees, setAllEmployees] = useState("")
+  const [allJobs, setAllJobs] = useState("")
 
 
   // Use Effects
 
-  useEffect(() =>{
-    getEmployeeJObs()
-  },[])
+  useEffect(() => (
+    getEmployeeJobs(),
+    getAllEmployees(),
+    getAllJobs()
+    
+  ),[userInfo])
+
+
+  //useEffect(() =>{
+  //  
+  //  getAllEmployees(),
+  //},[])
 
   // API Calls
 
-  
+  //
+  // For Owners
+  //
 
-  const getEmployeeJObs = async () => {
+
+ // Gets all jobs for employee
+  const getEmployeeJobs = async () => {
 
     const jwt = localStorage.getItem('token');
 
@@ -40,12 +58,36 @@ function App() {
     setJobList(response.data)
   }
 
-  const addEmployeeWorkDay = async () => {
+
+  //Gets all Employees
+  const getAllEmployees = async () => {
+
+    let response = await axios.get('http://127.0.0.1:8000/api/auth/employeelist/')
+    setAllEmployees(response.data)
+  }
+  //Gets all jobs using business name
+  const getAllJobs = async () => {
 
     const jwt = localStorage.getItem('token');
 
-    let response = await axios.post('http://127.0.0.1:8000/employees/addwork/', { headers: {Authorization: 'Bearer ' + jwt}})
+    let response = await axios.get("http://127.0.0.1:8000/owners/addJobs/" + + "/", { headers: {Authorization: 'Bearer ' + jwt}})
+    setAllJobs(response.data)
   }
+
+
+
+  //
+  // for employees
+  //
+
+    // Lets employees add time card
+    const addEmployeeWorkDay = async (data) => {
+
+      const jwt = localStorage.getItem('token');
+  
+      let response = await axios.post(`http://127.0.0.1:8000/employees/addwork/${userInfo.business_name}/`, { headers: {Authorization: 'Bearer ' + jwt}})
+    }
+
 
   // Log out 
 
@@ -55,19 +97,16 @@ function App() {
     console.log("logged user out")
   }
 
-  
-
-
-
   return (
     <div>   
         <NavBar logOutUser={logOut} />
         <Routes>
+          <Route path="/Calendar" element={ <Calendar />} />        
           <Route path="/" element= {<HomeScreen /> } />
           <Route path="/Registration" element= {<UserRegistration /> } />
           <Route path="/Login" element= {<UserLogin userData={setUserInfo}/> } />              
-          <Route path="/Owner/Home" element = {<OwnerHome /> } />
-          <Route path="/Employee/Home" element = {<EmployeeHome employeeJobs={jobList}/>} />
+          <Route path="/Owner/Home" element = {<OwnerHome loggedInUser={userInfo}    listOfEmployees={allEmployees}/> } />
+          <Route path="/Employee/Home" element = {<EmployeeHome employeeJobs={jobList} loggedInUser={userInfo} />} />
         </Routes>   
     </div>
   );

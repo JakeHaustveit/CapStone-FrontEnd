@@ -14,27 +14,25 @@ const UserRegistration = (props) => {
     
 
 
-    const submitForm =(event, pageId)=> {
+    const submitForm =(event, formPage)=> {
       handleSubmit(event)
-      setFormPage(pageId)
+      setFormPage(formPage)
     }
         
     let navigate= useNavigate();
 
-    useEffect(()=>{
-      
-    },[formPage])
+  
 
     async function Register() { 
       console.log(formPage)
       if(formPage === 1){
         let response = await axios.post('http://127.0.0.1:8000/api/auth/register/', formValues);
-        console.log(response.data)
+        
         navigate("../Login")
       }
       else{
         let response = await axios.post('http://127.0.0.1:8000/api/auth/register/employee/', formValues);
-        console.log(response.data)
+        
         navigate("../Login")
 
       }

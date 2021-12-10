@@ -17,18 +17,17 @@ const UserLogin = (props) => {
     let navigate= useNavigate();
 
     async function logIn() { 
-        let response = await axios.post('http://127.0.0.1:8000/api/auth/login/', formValues);
-        console.log(response.data)
+        let response = await axios.post('http://127.0.0.1:8000/api/auth/login/', formValues);    
         localStorage.setItem('token', response.data.access)
-        verifyUserLoginRedirect(formValues.username)
+        let username= formValues.username
+        verifyUserLoginRedirect(username)
     }
     
     async function verifyUserLoginRedirect(username) {
-
-      let response = await axios.get('http://127.0.0.1:8000/api/auth/userdata/' + username + "/")
+      let response = await axios.get(`http://127.0.0.1:8000/api/auth/userdata/${username}/`)
       console.log(response.data)
       props.userData(response.data)
-      if(response.data.is_staff === true){
+      if(response.data.is_staff == true){
         navigate("../Owner/Home")
       }
       else{

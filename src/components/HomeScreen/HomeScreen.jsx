@@ -6,7 +6,7 @@ import { Col, Row, Container } from "react-bootstrap";
 function HomeScreen(){
 
     return(
-        <div>
+        <div>            
             <Container className="homeScreenStyling">
                 <Row>
                     <h1>Welcome to Business Manager</h1>
