@@ -9,6 +9,7 @@ import EmployeeHome from './components/EmployeeHome/EmployeeHome';
 import OwnerHome from './components/OwnerHome/OwnerHome';
 import axios from 'axios';
 import Calendar from './components/Calendar/Calendar';
+import FullCalendar from '@fullcalendar/react' // must go before plugins
 
 
 
@@ -20,7 +21,7 @@ function App() {
 
   // Hooks
 
-  const [jobList, setJobList] = useState("")
+  const [employeeJobList, setEmployeeJobList] = useState("")
   const [userInfo, setUserInfo] = useState("")
   const [allEmployees, setAllEmployees] = useState("")
   const [allJobs, setAllJobs] = useState("")
@@ -55,7 +56,7 @@ function App() {
 
     let response = await axios.get('http://127.0.0.1:8000/owners/employeeroles/', { headers: {Authorization: 'Bearer ' + jwt}})
     console.log(response.data)
-    setJobList(response.data)
+    setEmployeeJobList(response.data)
   }
 
 
@@ -97,6 +98,10 @@ function App() {
     console.log("logged user out")
   }
 
+  // For Calendar
+
+  
+
   return (
     <div>   
         <NavBar logOutUser={logOut} />
@@ -106,7 +111,7 @@ function App() {
           <Route path="/Registration" element= {<UserRegistration /> } />
           <Route path="/Login" element= {<UserLogin userData={setUserInfo}/> } />              
           <Route path="/Owner/Home" element = {<OwnerHome loggedInUser={userInfo}    listOfEmployees={allEmployees}/> } />
-          <Route path="/Employee/Home" element = {<EmployeeHome employeeJobs={jobList} loggedInUser={userInfo} />} />
+          <Route path="/Employee/Home" element = {<EmployeeHome employeeJobs={employeeJobList} loggedInUser={userInfo} />} />
         </Routes>   
     </div>
   );

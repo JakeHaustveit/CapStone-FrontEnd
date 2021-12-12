@@ -29,8 +29,11 @@ const EmployeeHome = (props) => {
         <div>
             <h3> Welcome, {props.loggedInUser.first_name} {props.loggedInUser.last_name}</h3> 
             <Container>
-                <Col md={3}>
-                    <Row>
+            <Row>
+                <Col md={2}>
+                </Col>
+                <Col md={4}>
+                    
                     <h3>Time Card</h3>
                     <Form onSubmit= {handleSubmit}>
                     <Form.Group >
@@ -73,8 +76,8 @@ const EmployeeHome = (props) => {
 
                     </Form>
                     
-                    </Row>
-                    <Row>
+                    </Col>
+                    <Col md={4}>
                         <h3> Request Time Off Here</h3>
                     <Form onSubmit= {handleSubmit}>
                     <Form.Group >
@@ -97,9 +100,9 @@ const EmployeeHome = (props) => {
                     </Button>
                 </Form>
 
-                    </Row>
+                    
                 </Col>
-                
+                </Row>
             </Container>
             
 

@@ -10,13 +10,14 @@ import { Col, Row, Container } from "react-bootstrap";
 const UserRegistration = (props) => {
 
     const {formValues, handleChange, handleSubmit } = useForm(Register);
-    const [formPage, setFormPage] = useState(1);
+    const [formPage, setFormPage] = useState(2);
     
 
 
     const submitForm =(event, formPage)=> {
-      handleSubmit(event)
       setFormPage(formPage)
+      handleChange(event)      
+      console.log(formPage)
     }
         
     let navigate= useNavigate();
@@ -25,7 +26,7 @@ const UserRegistration = (props) => {
 
     async function Register() { 
       console.log(formPage)
-      if(formPage === 1){
+      if(formPage === 2){
         let response = await axios.post('http://127.0.0.1:8000/api/auth/register/', formValues);
         
         navigate("../Login")
@@ -44,7 +45,12 @@ const UserRegistration = (props) => {
       return (
           <div>
             <Container>
-              <Form onSubmit= {(event) => submitForm(event, 1)}>
+              <Row>
+            <Col md={2}>
+                </Col>
+              <Col md={8}>
+                
+              <Form onSubmit= {handleSubmit}>
                   <Form.Group >
                     <FloatingLabel label="User Name" className="mb-3" controlId="floatingTextarea">
                     <Form.Control type="username" name="username" placeholder="Enter User Name Here" onChange= {handleChange} required= {true}/>
@@ -95,7 +101,7 @@ const UserRegistration = (props) => {
 
                   <Form.Group>
                     <FloatingLabel controlId="floatingSelect" label="Select Status" >
-                      <Form.Select  type="test" name="is_staff" onChange= {handleChange} required= {true}>
+                      <Form.Select  type="test" name="is_staff" onChange= {(event) => submitForm(event, 1)} required= {true}>
                         <option>Select Job Code Here</option>
                         <option value="False">Owner</option>
                         <option value="True">Employee</option>
@@ -106,7 +112,9 @@ const UserRegistration = (props) => {
                   <Button variant="primary" type="submit" >
                     Submit
                   </Button>
-                  </Form>               
+                  </Form>
+                  </Col>
+                  </Row>              
               </Container>
           </div>
       );
@@ -116,7 +124,11 @@ const UserRegistration = (props) => {
       return (
         <div>
           <Container>
-            <Form onSubmit= {(event) => submitForm(event,2)}> 
+          <Row>
+            <Col md={2}>
+              </Col>
+              <Col md={8}>
+            <Form onSubmit= {handleSubmit}> 
                 <Form.Group >
                   <FloatingLabel label="User Name" className="mb-3" controlId="floatingTextarea">
                   <Form.Control type="username" name="username" placeholder="Enter User Name Here" onChange= {handleChange} required= {true}/>
@@ -167,7 +179,7 @@ const UserRegistration = (props) => {
 
                 <Form.Group>
                   <FloatingLabel controlId="floatingSelect" label="Select Status" >
-                    <Form.Select  type="test" name="is_staff" onChange= {handleChange} required= {true}>
+                    <Form.Select  type="test" name="is_staff" onChange= {(event) => submitForm(event, 2)} required= {true}>
                       <option>Select Job Code Here</option>
                       <option value="False"  >Owner</option>
                       <option value="True">Employee</option>
@@ -178,7 +190,9 @@ const UserRegistration = (props) => {
                 <Button variant="primary" type="submit" >
                   Submit
                 </Button>
-              </Form> 
+              </Form>
+              </Col>
+              </Row> 
             </Container>
         </div>
       );
@@ -188,7 +202,7 @@ const UserRegistration = (props) => {
       <React.Fragment>
         <div>
           
-            {formPage === 1 ? renderOwnerRegistration() : RenderEmployeeRegistration()}
+            {formPage === 2 ? renderOwnerRegistration() : RenderEmployeeRegistration()}
           
         </div>
       </React.Fragment>

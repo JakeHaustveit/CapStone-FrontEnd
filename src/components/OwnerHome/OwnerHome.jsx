@@ -45,8 +45,9 @@ const OwnerHome = (props) => {
     <div className="Form">
         <h3> Welcome {props.loggedInUser.first_name} {props.loggedInUser.last_name}</h3>
             <Container className="Container">
+                <Row>
                 <Col md={3} className="Container">
-                    <h3> Add Jobs Here </h3>                    
+                    <h6> Add Jobs Here </h6>                    
                     <Form onSubmit= {handleSubmit}>
 
                         <Form.Group >
@@ -84,30 +85,15 @@ const OwnerHome = (props) => {
                         </Button>
 
                     </Form>
-                </Col>
-                <Col className="Container">
-                    <Form onSubmit= {handleSubmit2}>
-                        <Form.Group >
-                            <FloatingLabel label="Employee Roles" className="mb-3" controlId="floatingTextarea">
-                                <Form.Control type="text" name="labor_code" placeholder="Add Employee Roles Here" onChange= {handleChange2} required= {true}/>
-                            </FloatingLabel>
-                        </Form.Group>
-
-                        <Button variant="primary" type="submit">
-                            Submit
-                        </Button>
-                    </Form>
-
-                </Col>
+                </Col>                
                 <Col>
+                <h5> Employee Data </h5> 
                    <Table>
                        <thead>
                            <tr>
                                <td>User Name</td>
                                <td>First Name</td>
                                <td>Last Name</td>
-                               
-
                            </tr>
                        </thead>
                        <tbody>
@@ -124,6 +110,24 @@ const OwnerHome = (props) => {
                        </tbody>
                    </Table>
                 </Col>
+                </Row>
+                <Row>
+                <Col md={3} className="Container">
+                <h6> Add Jobs Here </h6> 
+                    <Form onSubmit= {handleSubmit2}>
+                        <Form.Group >
+                            <FloatingLabel label="Employee Roles" className="mb-3" controlId="floatingTextarea">
+                                <Form.Control type="text" name="labor_code" placeholder="Add Employee Roles Here" onChange= {handleChange2} required= {true}/>
+                            </FloatingLabel>
+                        </Form.Group>
+
+                        <Button variant="primary" type="submit">
+                            Submit
+                        </Button>
+                    </Form>
+
+                </Col>
+                </Row>
             </Container>
             
 
