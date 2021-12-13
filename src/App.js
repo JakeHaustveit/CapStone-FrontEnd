@@ -10,6 +10,7 @@ import OwnerHome from './components/OwnerHome/OwnerHome';
 import axios from 'axios';
 import Calendar from './components/Calendar/Calendar';
 import FullCalendar from '@fullcalendar/react' // must go before plugins
+import EmployeeDetails from './components/EmployeeDetails/EmployeeDetails'
 
 
 
@@ -25,6 +26,7 @@ function App() {
   const [userInfo, setUserInfo] = useState("")
   const [allEmployees, setAllEmployees] = useState("")
   const [allJobs, setAllJobs] = useState("")
+  const [employeeInfo, setEmployeeInfo] = useState('')
 
 
   // Use Effects
@@ -36,6 +38,10 @@ function App() {
     
   ),[userInfo])
 
+  useEffect(() =>{
+    getAllEmployees()
+  
+  }, [allEmployees])
 
   //useEffect(() =>{
   //  
@@ -73,6 +79,17 @@ function App() {
 
     let response = await axios.get("http://127.0.0.1:8000/owners/addJobs/" + + "/", { headers: {Authorization: 'Bearer ' + jwt}})
     setAllJobs(response.data)
+  },
+
+  //Delete Employee
+
+  deleteEmployee = async (employee) => {
+
+    const jwt = localStorage.getItem('token');
+    console.log(employee)
+
+    let response = await axios.delete(`http://127.0.0.1:8000/api/auth/userdata/${employee}/`, { headers: {Authorization: 'Bearer ' + jwt}})
+
   }
 
 
@@ -81,13 +98,17 @@ function App() {
   // for employees
   //
 
-    // Lets employees add time card
-    const addEmployeeWorkDay = async (data) => {
+  const viewEmployeeDetails = async (employee) => {
 
-      const jwt = localStorage.getItem('token');
-  
-      let response = await axios.post(`http://127.0.0.1:8000/employees/addwork/${userInfo.business_name}/`, { headers: {Authorization: 'Bearer ' + jwt}})
-    }
+    const jwt = localStorage.getItem('token');
+
+    let response = await axios.get(`http://127.0.0.1:8000/employees/employeeworkschedule/${employee}/`, { headers: {Authorization: 'Bearer ' + jwt}})
+    setEmployeeInfo(response.data)
+
+  }
+
+
+    
 
 
   // Log out 
@@ -110,9 +131,11 @@ function App() {
           <Route path="/" element= {<HomeScreen /> } />
           <Route path="/Registration" element= {<UserRegistration /> } />
           <Route path="/Login" element= {<UserLogin userData={setUserInfo}/> } />              
-          <Route path="/Owner/Home" element = {<OwnerHome loggedInUser={userInfo}    listOfEmployees={allEmployees}/> } />
+          <Route path="/Owner/Home" element = {<OwnerHome loggedInUser={userInfo}    listOfEmployees={allEmployees} employeeDetailList= {viewEmployeeDetails} /> } />
           <Route path="/Employee/Home" element = {<EmployeeHome employeeJobs={employeeJobList} loggedInUser={userInfo} />} />
-        </Routes>   
+          <Route path="/EmployeeDetails" element = {<EmployeeDetails  employeeDetailList={employeeInfo} removeEmployee={deleteEmployee}/>} />
+        </Routes>
+        
     </div>
   );
 }

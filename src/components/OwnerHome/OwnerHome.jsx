@@ -10,11 +10,13 @@ import { Col, Row, Container } from "react-bootstrap";
 import useForm2 from "../UseForm/UseForm2";
 import Table from "react-bootstrap/Table";
 
+
 const OwnerHome = (props) => {
 
     const {formValues, handleChange, handleSubmit } = useForm(OwnerAddJobsFormSubmit);
     const {formValues2, handleChange2, handleSubmit2} = useForm2(OwnerEmployeeLaborCodeFormSubmit);
     let navigate= useNavigate();
+    
 
     // Adds jobs 
     async function OwnerAddJobsFormSubmit() { 
@@ -24,20 +26,25 @@ const OwnerHome = (props) => {
         let response = await axios.post(`http://127.0.0.1:8000/owners/registerjobs/`, { headers: {Authorization: 'Bearer ' + jwt},
             business_name: formValues.business_name, job_site: formValues.job_site, job_name: formValues.job_name, job_start_date: formValues.job_start_date, job_end_date: formValues.job_end_date });
         console.log(response.data)
+       
         
     }
 
         // Sets Employee Labor Code
     async function OwnerEmployeeLaborCodeFormSubmit() { 
-        const jwt = localStorage.getItem('token');
-        console.log(formValues2)
-        
-        
+
+        const jwt = localStorage.getItem('token'); 
+
         let response = await axios.post(`http://127.0.0.1:8000/owners/employeeroleregistration/`, { headers: {Authorization: 'Bearer ' + jwt}, labor_code: formValues2.labor_code});
-        console.log(response.data)
+        console.log(response.data);
+        
         
     }
 
+    async function viewEmployee(employee) {
+        props.employeeDetailList(employee)
+        navigate("..//EmployeeDetails")
+    } 
 
 
 
@@ -94,16 +101,20 @@ const OwnerHome = (props) => {
                                <td>User Name</td>
                                <td>First Name</td>
                                <td>Last Name</td>
+                               <td>Delete Employee</td>
                            </tr>
                        </thead>
                        <tbody>
                          {props.listOfEmployees.map((employee) => {
                            return (
+                               
                              <tr key={employee.username}>
                                <td>{employee.username}</td>
                                <td>{employee.first_name}</td>
                                <td>{employee.last_name}</td>
-                             </tr>
+                               <td><button onClick={() => viewEmployee(employee.username)}>View Employee Time Sheet</button> </td>                                                             
+                             </tr>                             
+                             
 
                            );
                          })}
