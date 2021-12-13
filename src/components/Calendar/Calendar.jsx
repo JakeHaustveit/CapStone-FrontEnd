@@ -1,17 +1,13 @@
 import React, {Component} from 'react'
 import FullCalendar from '@fullcalendar/react' // must go before plugins
 import dayGridPlugin from '@fullcalendar/daygrid' // a plugin!
+import interactionPlugin from '@fullcalendar/interaction'
+import timeGridPlugin from '@fullcalendar/timegrid'
 import "./Calendar.css"
 import { Container } from 'react-bootstrap'
 
-class Calendar extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-
-        }
-    }
-
+export default class Calendar extends Component {
+  
     
     
     
@@ -20,9 +16,9 @@ class Calendar extends Component {
         <div >
             <Container>
             <FullCalendar 
-        plugins={[ dayGridPlugin ]}
+        plugins={[ dayGridPlugin, interactionPlugin, timeGridPlugin ]}
         initialView="dayGridMonth"
-        eventContent={this.props.listOfJobs}
+        
       />
         </Container>
         </div>
@@ -30,4 +26,5 @@ class Calendar extends Component {
     )
   }
 }
-export default Calendar;
+
+ 

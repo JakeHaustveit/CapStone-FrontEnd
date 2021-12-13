@@ -53,34 +53,34 @@ const UserRegistration = (props) => {
               <Form onSubmit= {handleSubmit}>
                   <Form.Group >
                     <FloatingLabel label="User Name" className="mb-3" controlId="floatingTextarea">
-                    <Form.Control type="username" name="username" placeholder="Enter User Name Here" onChange= {handleChange} required= {true}/>
+                    <Form.Control type="username" name="username" onChange= {handleChange} required= {true}/>
                     </FloatingLabel>
 
                   </Form.Group>
 
                   <Form.Group className="mb-3" controlId="floatingPassword">
                     <FloatingLabel label="">Password
-                    <Form.Control type="password" name="password" placeholder="Password" onChange= {handleChange} required= {true}/>
+                    <Form.Control type="password" name="password" onChange= {handleChange} required= {true}/>
                     </FloatingLabel>
                   </Form.Group>
 
                   <Form.Group >
                     <FloatingLabel label="Email" className="mb-3" controlId="formBasicEmail">
-                    <Form.Control type="email" name="email" placeholder="name@example.com" onChange= {handleChange} required= {true}/>
+                    <Form.Control type="email" name="email" onChange= {handleChange} required= {true}/>
                     </FloatingLabel>
 
                   </Form.Group>
 
                   <Form.Group className="mb-3" controlId="floatingTextarea">
                     <FloatingLabel label="First Name">
-                    <Form.Control type="text" name="first_name" placeholder="Enter First Name" onChange= {handleChange} required= {true}/>
+                    <Form.Control type="text" name="first_name" onChange= {handleChange} required= {true}/>
                     </FloatingLabel>
 
                   </Form.Group>
 
                   <Form.Group className="mb-3" controlId="floatingTextarea">
                     <FloatingLabel label="Last Name">
-                    <Form.Control type="text" name="last_name" placeholder="Enter Last Name" onChange= {handleChange} required= {true}/>
+                    <Form.Control type="text" name="last_name" onChange= {handleChange} required= {true}/>
                     </FloatingLabel>
 
                   </Form.Group>

@@ -49,12 +49,17 @@ const EmployeeHome = (props) => {
                     <Form onSubmit= {handleSubmit}>
                     <Form.Group >
                         <FloatingLabel label="User Name" className="mb-3" controlId="floatingTextarea">
-                        <Form.Control type="text" name="username" placeholder="Enter User Name Here" onChange= {handleChange} required= {true}/>
+                        <Form.Control type="text" name="username"  onChange= {handleChange} required= {true}/>
+                        </FloatingLabel>
+                    </Form.Group>
+                    <Form.Group >
+                        <FloatingLabel label="Job Name" className="mb-3" controlId="floatingTextarea">
+                        <Form.Control type="text" name="area_working"  onChange= {handleChange} required= {true}/>
                         </FloatingLabel>
                     </Form.Group>
                     <Form.Group >
                         <FloatingLabel label="Day Worked" className="mb-3" controlId="floatingTextarea">
-                        <Form.Control type="date" name="date_worked" placeholder="Enter User Name Here" onChange= {handleChange} required= {true}/>
+                        <Form.Control type="date" name="date_worked"  onChange= {handleChange} required= {true}/>
                         </FloatingLabel>
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="floatingTextarea">

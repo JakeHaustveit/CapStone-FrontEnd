@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import axios from 'axios';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -16,6 +16,10 @@ const OwnerHome = (props) => {
     const {formValues, handleChange, handleSubmit } = useForm(OwnerAddJobsFormSubmit);
     const {formValues2, handleChange2, handleSubmit2} = useForm2(OwnerEmployeeLaborCodeFormSubmit);
     let navigate= useNavigate();
+
+    useEffect(()=>{
+
+    },[props.loadData])
     
 
     // Adds jobs 
@@ -59,19 +63,19 @@ const OwnerHome = (props) => {
 
                         <Form.Group >
                             <FloatingLabel label="Job Name" className="mb-3" controlId="floatingTextarea">
-                                <Form.Control type="text" name="job_name" placeholder="Enter Job Name Here" onChange= {handleChange} required= {true}/>
+                                <Form.Control type="text" name="job_name" onChange= {handleChange} required= {true}/>
                             </FloatingLabel>
                         </Form.Group>
 
                         <Form.Group >
                             <FloatingLabel label="Job Site" className="mb-3" controlId="floatingTextarea">
-                            <Form.Control type="text" name="job_site" placeholder="Enter Job Site Here" onChange= {handleChange} required= {true}/>
+                            <Form.Control type="text" name="job_site" onChange= {handleChange} required= {true}/>
                             </FloatingLabel>
                         </Form.Group>
 
                         <Form.Group >
                             <FloatingLabel label="Business Name" className="mb-3" controlId="floatingTextarea">
-                                <Form.Control type="text" name="business_name" placeholder="name@example.com" onChange= {handleChange} required= {true}/>
+                                <Form.Control type="text" name="business_name" onChange= {handleChange} required= {true}/>
                             </FloatingLabel>
                         </Form.Group>
 
@@ -101,23 +105,25 @@ const OwnerHome = (props) => {
                                <td>User Name</td>
                                <td>First Name</td>
                                <td>Last Name</td>
-                               <td>Delete Employee</td>
+                               <td>Employee Details</td>
                            </tr>
                        </thead>
                        <tbody>
+                           
                          {props.listOfEmployees.map((employee) => {
                            return (
-                               
                              <tr key={employee.username}>
                                <td>{employee.username}</td>
                                <td>{employee.first_name}</td>
                                <td>{employee.last_name}</td>
                                <td><button onClick={() => viewEmployee(employee.username)}>View Employee Time Sheet</button> </td>                                                             
-                             </tr>                             
-                             
-
+                             </tr>
                            );
-                         })}
+                        })}
+                         
+                         
+                            
+                         
                        </tbody>
                    </Table>
                 </Col>
@@ -128,7 +134,7 @@ const OwnerHome = (props) => {
                     <Form onSubmit= {handleSubmit2}>
                         <Form.Group >
                             <FloatingLabel label="Employee Roles" className="mb-3" controlId="floatingTextarea">
-                                <Form.Control type="text" name="labor_code" placeholder="Add Employee Roles Here" onChange= {handleChange2} required= {true}/>
+                                <Form.Control type="text" name="labor_code"  onChange= {handleChange2} required= {true}/>
                             </FloatingLabel>
                         </Form.Group>
 

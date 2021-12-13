@@ -13,7 +13,9 @@ const EmployeeHome = (props) => {
 
     const handleClick=(event)=> {
         props.removeEmployee(event)
+        props.setLoadData(!props.loadData)
         navigate("../Owner/Home")
+        
 
     }
    

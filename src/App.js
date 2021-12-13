@@ -9,8 +9,7 @@ import EmployeeHome from './components/EmployeeHome/EmployeeHome';
 import OwnerHome from './components/OwnerHome/OwnerHome';
 import axios from 'axios';
 import Calendar from './components/Calendar/Calendar';
-import FullCalendar from '@fullcalendar/react' // must go before plugins
-import EmployeeDetails from './components/EmployeeDetails/EmployeeDetails'
+import EmployeeDetails from './components/EmployeeDetails/EmployeeDetails';
 
 
 
@@ -27,6 +26,7 @@ function App() {
   const [allEmployees, setAllEmployees] = useState("")
   const [allJobs, setAllJobs] = useState("")
   const [employeeInfo, setEmployeeInfo] = useState('')
+  const [loadData, setLoadData]= useState(false)
 
 
   // Use Effects
@@ -34,14 +34,15 @@ function App() {
   useEffect(() => (
     getEmployeeJobs(),
     getAllEmployees(),
-    getAllJobs()
+    getAllJobs(),
+    setLoadData()
     
   ),[userInfo])
 
   useEffect(() =>{
     getAllEmployees()
   
-  }, [allEmployees])
+  }, [loadData])
 
   //useEffect(() =>{
   //  
@@ -69,7 +70,7 @@ function App() {
   //Gets all Employees
   const getAllEmployees = async () => {
 
-    let response = await axios.get('http://127.0.0.1:8000/api/auth/employeelist/')
+    let response = await axios.get(`http://127.0.0.1:8000/api/auth/employeelist/${userInfo.business_name}`)
     setAllEmployees(response.data)
   }
   //Gets all jobs using business name
@@ -77,7 +78,7 @@ function App() {
 
     const jwt = localStorage.getItem('token');
 
-    let response = await axios.get("http://127.0.0.1:8000/owners/addJobs/" + + "/", { headers: {Authorization: 'Bearer ' + jwt}})
+    let response = await axios.get(`http://127.0.0.1:8000/owners/addJobs/${userInfo.business_name}/`, { headers: {Authorization: 'Bearer ' + jwt}})
     setAllJobs(response.data)
   },
 
@@ -114,8 +115,14 @@ function App() {
   // Log out 
 
   const logOut = ()=>{
-    localStorage.removeItem("token");
+    
     setUserInfo({})
+    setEmployeeJobList({})
+    setAllEmployees({})
+    setAllJobs({})
+    setEmployeeInfo({})
+    setLoadData({})
+    localStorage.removeItem("token");
     console.log("logged user out")
   }
 
@@ -127,13 +134,13 @@ function App() {
     <div>   
         <NavBar logOutUser={logOut} />
         <Routes>
-          <Route path="/Calendar" element={ <Calendar />} />        
+          <Route path="/Calendar" element={ <Calendar listOfJobs={allJobs} />} />        
           <Route path="/" element= {<HomeScreen /> } />
           <Route path="/Registration" element= {<UserRegistration /> } />
           <Route path="/Login" element= {<UserLogin userData={setUserInfo}/> } />              
-          <Route path="/Owner/Home" element = {<OwnerHome loggedInUser={userInfo}    listOfEmployees={allEmployees} employeeDetailList= {viewEmployeeDetails} /> } />
+          <Route path="/Owner/Home" element = {<OwnerHome loggedInUser={userInfo}    listOfEmployees={allEmployees} employeeDetailList= {viewEmployeeDetails} loadData={loadData}/> } />
           <Route path="/Employee/Home" element = {<EmployeeHome employeeJobs={employeeJobList} loggedInUser={userInfo} />} />
-          <Route path="/EmployeeDetails" element = {<EmployeeDetails  employeeDetailList={employeeInfo} removeEmployee={deleteEmployee}/>} />
+          <Route path="/EmployeeDetails" element = {<EmployeeDetails  employeeDetailList={employeeInfo} removeEmployee={deleteEmployee} loadData={loadData}  setLoadData={setLoadData}/>} />
         </Routes>
         
     </div>

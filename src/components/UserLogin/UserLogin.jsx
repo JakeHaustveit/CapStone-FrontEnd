@@ -19,7 +19,7 @@ const UserLogin = (props) => {
     async function logIn() { 
         let response = await axios.post('http://127.0.0.1:8000/api/auth/login/', formValues);    
         localStorage.setItem('token', response.data.access)
-        let username= formValues.username
+        let username= formValues.username        
         verifyUserLoginRedirect(username)
     }
     
@@ -45,14 +45,14 @@ const UserLogin = (props) => {
         <Form  onSubmit= {handleSubmit}>
                 <Form.Group  >
                   <FloatingLabel className="mb-3"  label="User Name" controlId="floatingTextarea">
-                  <Form.Control type="username" name="username" placeholder="Enter UserName" onChange= {handleChange} required= {true}/>
+                  <Form.Control type="username" name="username"  onChange= {handleChange} required= {true}/>
                   </FloatingLabel>
 
                 </Form.Group>
 
                 <Form.Group >
                   <FloatingLabel className="mb-3" label="Password" controlId="floatingPassword">
-                  <Form.Control type="password" name="password" placeholder="Password" onChange= {handleChange} required= {true}/>
+                  <Form.Control type="password" name="password" onChange= {handleChange} required= {true}/>
                   </FloatingLabel>
                 </Form.Group>
 
