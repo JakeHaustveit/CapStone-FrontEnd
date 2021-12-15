@@ -38,16 +38,17 @@ function App() {
 
   // Use Effects
 
-  useEffect(() => (
-    getEmployeeJobs(),
-    getAllEmployees(),
-    getAllJobs(),
+  useEffect(() => {
+    getEmployeeJobs()
+    getAllEmployees()
+    getAllJobs()
     setLoadData()
     
-  ),[userInfo])
+  } ,[userInfo])
 
   useEffect(() =>{
     getAllEmployees()
+    
   
   }, [loadData])
 
@@ -162,7 +163,7 @@ function App() {
           <Route path="/Registration" element= {<UserRegistration /> } />
           <Route path="/Login" element= {<UserLogin userData={setUserInfo}/> } />              
           <Route path="/Owner/Home" element = {<OwnerHome loggedInUser={userInfo}    listOfEmployees={allEmployees} employeeDetailList= {viewEmployeeDetails} employeeVacationList={viewEmployeeVacation} loadData={loadData}/> } />
-          <Route path="/Employee/Home" element = {<EmployeeHome employeeJobs={employeeJobList} loggedInUser={userInfo} />} />
+          <Route path="/Employee/Home" element = {<EmployeeHome employeeJobs={employeeJobList} loggedInUser={userInfo}  />} />
           <Route path="/EmployeeDetails" element = {<EmployeeDetails  employeeDetailList={employeeInfo} removeEmployee={deleteEmployee} loadData={loadData}  setLoadData={setLoadData}  employeeVacation={employeeVacationDate}/>} />
         </Routes>
         

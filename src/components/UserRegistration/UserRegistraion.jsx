@@ -6,6 +6,7 @@ import Button from 'react-bootstrap/Button';
 import useForm from '../UseForm/UseForm';
 import { useNavigate } from 'react-router-dom';
 import { Col, Row, Container } from "react-bootstrap";
+import "./UserRegistration.css"
 
 const UserRegistration = (props) => {
 
@@ -100,7 +101,7 @@ const UserRegistration = (props) => {
                   </Form.Group>
 
                   <Form.Group>
-                    <FloatingLabel controlId="floatingSelect" label="Select Status" >
+                    <FloatingLabel className="mb-3" controlId="floatingSelect" label="Select Status" >
                       <Form.Select  type="test" name="is_staff" onChange= {(event) => submitForm(event, 1)} required= {true}>
                         <option>Select Job Code Here</option>
                         <option value="False">Owner</option>
@@ -187,7 +188,7 @@ const UserRegistration = (props) => {
                   </FloatingLabel>                  
                 </Form.Group>
 
-                <Button variant="primary" type="submit" >
+                <Button className="center" variant="primary" type="submit" >
                   Submit
                 </Button>
               </Form>

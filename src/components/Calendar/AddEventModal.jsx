@@ -38,6 +38,7 @@ export default function ({isOpen, onClose, onEventAdded, handleEventAdd}) {
     
     return(
         <Modal isOpen={isOpen} onRequestClose={onClose}>
+            <h3> Add Job Here</h3>
             <Form onSubmit= {onSubmit}>
 
                 <Form.Group >

@@ -1,6 +1,6 @@
 import React from 'react';
 import './HomeScreen.css'
-import { Col, Row, Container } from "react-bootstrap";
+import { Row, Container } from "react-bootstrap";
 
 
 function HomeScreen(){

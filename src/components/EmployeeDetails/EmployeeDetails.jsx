@@ -1,5 +1,5 @@
 import React from "react";
-import { Col, Row, Container, ButtonGroup} from "react-bootstrap";
+import { Col, Row, Container, Stack} from "react-bootstrap";
 import Button from 'react-bootstrap/Button';
 import { useNavigate } from 'react-router-dom';
 import Table from "react-bootstrap/Table";
@@ -25,7 +25,7 @@ const EmployeeDetails = (props) => {
     return(
         <div>
             <Container >
-                <Col className="Employee"><h3>Employee Name</h3>
+                <Col className="Employee"><h3>{employeeWorkSchedule[0].username}</h3>
                  
             </Col> 
             <Col  className="button">
@@ -34,6 +34,7 @@ const EmployeeDetails = (props) => {
                 <thead>
                     <tr>
                     <td>Day Worked</td>
+                    <td>Job Name</td>
                     <td>Start Time</td>
                     <td>End Time</td>
                     <td>Labor Code</td>
@@ -46,6 +47,7 @@ const EmployeeDetails = (props) => {
                         
                       <tr key={employee.username}>
                         <td>{employee.date_worked}</td>
+                        <td>{employee.area_working}</td>
                         <td>{employee.start_time}</td>
                         <td>{employee.end_time}</td>
                         <td>{employee.labor_code}</td>
@@ -82,14 +84,13 @@ const EmployeeDetails = (props) => {
                 </Table>
             </Row>
             </Col>
-            <Col  className="button">
+            <Col className="col-md-3 mx-auto">
             
-                <ButtonGroup className="buttonGroup">
+                <Stack gap= {2} className="buttonGroup">
                     <Button onClick={() => handleClick(employeeWorkSchedule.username)}>Delete Employee</Button>
-                </ButtonGroup>
-                <ButtonGroup>
+                
                     <Button onClick={()=>{navigate("../Owner/Home")} }> Return </Button>
-                </ButtonGroup>
+                </Stack>
             
 
             </Col>

@@ -52,20 +52,29 @@ export default function(props){
         
   }
 
- async function handleDatesSet() {
-   console.log(props)
-   let business_name= props.user.business_name
-   const jwt = localStorage.getItem('token');
-   const response = await axios.get(`http://127.0.0.1:8000/owners/addJobs/${business_name}`, { headers: {Authorization: 'Bearer ' + jwt}})
-   console.log(response.data)
-   renderEventContent(response.data)
-   setJobEvents(response.data)
- }
+  async function handleDatesSet() {
+    console.log(props)
+   var business_name
+ 
+    if(props.user.is_staff=== true){
+     
+       business_name = props.user.business_name
+     
+    }else{
+      business_name =props.user.owner_id
+    }
+    
+    const jwt = localStorage.getItem('token');
+    const response = await axios.get(`http://127.0.0.1:8000/owners/addJobs/${business_name}`, { headers: {Authorization: 'Bearer ' + jwt}})
+    console.log(response.data)
+    renderEventContent(response.data)
+    setJobEvents(response.data)
+  }
   
   
 
     return( 
-      <Container>
+      <Container className="button">
         <Button onClick={()=> setModalOpen(true) }>Add Event</Button>
           <div style={{position: "relative", zIndex:0}}>
             <FullCalendar

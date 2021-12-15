@@ -57,50 +57,13 @@ const OwnerHome = (props) => {
 
     return(
     <div className="Form">
-        <h3> Welcome {props.loggedInUser.first_name} {props.loggedInUser.last_name}</h3>
+        
+        <h3 > Welcome, {props.loggedInUser.first_name} {props.loggedInUser.last_name}!</h3>
             <Container className="Container">
                 <Row>
-                <Col md={3} className="Container">
-                    <h6> Add Jobs Here </h6>                    
-                    <Form onSubmit= {handleSubmit}>
-
-                        <Form.Group >
-                            <FloatingLabel label="Job Name" className="mb-3" controlId="floatingTextarea">
-                                <Form.Control type="text" name="job_name" onChange= {handleChange} required= {true}/>
-                            </FloatingLabel>
-                        </Form.Group>
-
-                        <Form.Group >
-                            <FloatingLabel label="Job Site" className="mb-3" controlId="floatingTextarea">
-                            <Form.Control type="text" name="job_site" onChange= {handleChange} required= {true}/>
-                            </FloatingLabel>
-                        </Form.Group>
-
-                        <Form.Group >
-                            <FloatingLabel label="Business Name" className="mb-3" controlId="floatingTextarea">
-                                <Form.Control type="text" name="business_name" onChange= {handleChange} required= {true}/>
-                            </FloatingLabel>
-                        </Form.Group>
-
-                        <Form.Group >
-                            <FloatingLabel label="Start Date" className="mb-3" controlId="floatingTextarea">
-                                <Form.Control type="date" name="job_start_date"  onChange= {handleChange} required= {true}/>
-                            </FloatingLabel>
-                        </Form.Group>
-
-                        <Form.Group className="mb-3" controlId="floatingTextarea">
-                            <FloatingLabel label="Job End Date">
-                                <Form.Control type="date" name="job_end_date" onChange= {handleChange} required= {true}/>
-                            </FloatingLabel>
-                        </Form.Group>
-
-                        <Button variant="primary" type="submit">
-                            Submit
-                        </Button>
-
-                    </Form>
-                </Col>                
-                <Col>
+                    <Col md={0}>
+                    </Col>               
+                <Col  md={9}>
                 <h5> Employee Data </h5> 
                    <Table bordered hover>
                        <thead>
@@ -123,16 +86,10 @@ const OwnerHome = (props) => {
                              </tr>
                            );
                         })}
-                         
-                         
-                            
-                         
                        </tbody>
                    </Table>
                 </Col>
-                </Row>
-                <Row>
-                <Col md={3} className="Container">
+                <Col md={2} style={{margin_top: "50px"}}>
                 <h6> Add Jobs Here </h6> 
                     <Form onSubmit= {handleSubmit2}>
                         <Form.Group >
