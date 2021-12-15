@@ -46,9 +46,12 @@ const OwnerHome = (props) => {
     }
 
     async function viewEmployee(employee) {
-        props.employeeDetailList(employee)
+        await props.employeeDetailList(employee)
+        await props.employeeVacationList(employee)
         navigate("..//EmployeeDetails")
     } 
+
+   
 
 
 

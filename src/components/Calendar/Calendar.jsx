@@ -5,8 +5,8 @@ import "./Calendar.css"
 import { Button, Container } from 'react-bootstrap'
 import AddEventModal from './AddEventModal'
 import axios from 'axios'
-import moment from "moment"
 import { useEffect } from 'react'
+
 
 
 
@@ -14,41 +14,52 @@ import { useEffect } from 'react'
 
 export default function(props){
   const[modalOpen, setModalOpen]= useState("")
-  const[events, setEvents] = useState([])
+  const[jobEvents, setJobEvents] = useState([])
   const calendarRef = useRef(null) 
   const [toggle, setToggle] = useState(false)
 
-  const onEventAdded = event => {
+  const onEventAdded = (event) => {
     let calendarApi = calendarRef.current.getApi()
     calendarApi.addEvent( {
-      title: event.title,
-      description: event.description,            
-      start: event.start,
-      end: event.end
+      title: event.title || event.job_name,
+      description: event.description || event.job_site,            
+      start: event.start || event.job_start_date,
+      end: event.end || event.job_end_date
     })
   }
 
+
+ function renderEventContent(events){
+   return(
+     events.map((event)=>{
+      onEventAdded(event)
+     })
+   )
+
+ }
  
-    useEffect(()=>{
+  useEffect(()=>{
       handleDatesSet()
     },[toggle])
   
 
-  async function handleEventAdd(data) {
+  async function handleEventAdd() {
     const jwt = localStorage.getItem('token');
-    await axios.post(`http://127.0.0.1:8000/owners/registerjobs/`, data, { headers: {Authorization: 'Bearer ' + jwt},})
+    await axios.post(`http://127.0.0.1:8000/owners/registerjobs/`, { headers: {Authorization: 'Bearer ' + jwt},})
             // business_name: data.business_name, job_site: data.job_site, job_name: data.job_name, job_start_date: data.job_start_date, job_end_date: data.job_end_date });
             setToggle(!toggle)
+            
         
   }
 
- async function handleDatesSet(data) {
+ async function handleDatesSet() {
    console.log(props)
    let business_name= props.user.business_name
    const jwt = localStorage.getItem('token');
    const response = await axios.get(`http://127.0.0.1:8000/owners/addJobs/${business_name}`, { headers: {Authorization: 'Bearer ' + jwt}})
    console.log(response.data)
-   setEvents(response.data)
+   renderEventContent(response.data)
+   setJobEvents(response.data)
  }
   
   
@@ -59,15 +70,13 @@ export default function(props){
           <div style={{position: "relative", zIndex:0}}>
             <FullCalendar
             ref={calendarRef}
-            events={events}
+            events={jobEvents}
             plugins={[ dayGridPlugin]}
-            initialView= 'dayGridMonth'
-            // eventContent={}
-            eventAdd={event => handleEventAdd(event)}
-            datesSet={()=> handleDatesSet()}                     
+            initialView= 'dayGridMonth'            
+            eventAdd={(event) => handleEventAdd(event)}  
             />
           </div>
-          <AddEventModal isOpen={modalOpen} onClose={() => setModalOpen(false)} onEventAdded={event=> onEventAdded(event)} handleEventAdd = {handleEventAdd} />
+          <AddEventModal isOpen={modalOpen} onClose={() => setModalOpen(false)} onEventAdded={(event)=> onEventAdded(event)} handleEventAdd = {handleEventAdd} />
       </Container>
       
     )

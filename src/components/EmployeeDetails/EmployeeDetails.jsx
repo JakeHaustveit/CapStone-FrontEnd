@@ -1,5 +1,5 @@
 import React from "react";
-import { Col, Row, Container, ButtonGroup, ButtonToolbar } from "react-bootstrap";
+import { Col, Row, Container, ButtonGroup} from "react-bootstrap";
 import Button from 'react-bootstrap/Button';
 import { useNavigate } from 'react-router-dom';
 import Table from "react-bootstrap/Table";
@@ -7,8 +7,9 @@ import './EmployeeDetails.css'
 
 
 
-const EmployeeHome = (props) => {
-    let data = Array.from(props.employeeDetailList)
+const EmployeeDetails = (props) => {
+    let employeeWorkSchedule = Array.from(props.employeeDetailList)
+    
 
     let navigate = useNavigate()
 
@@ -28,6 +29,7 @@ const EmployeeHome = (props) => {
                  
             </Col> 
             <Col  className="button">
+                <Row>
             <Table bordered hover>
                 <thead>
                     <tr>
@@ -39,7 +41,7 @@ const EmployeeHome = (props) => {
 
                 </thead>
                 <tbody>
-                {data.map((employee) => {
+                {employeeWorkSchedule.map((employee) => {
                     return (
                         
                       <tr key={employee.username}>
@@ -55,11 +57,35 @@ const EmployeeHome = (props) => {
                          })}
                 </tbody>
             </Table>
+            </Row>
+            <Row>
+                <Table bordered hover>
+                    <thead>
+                        <tr >
+                            <td>Vacation Start</td>
+                            <td>Vacation End</td>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        {props.employeeVacation.map((vacation) => {
+                            return(
+                                <tr key={vacation.username}>
+                                    <td>{vacation.vacation_start_date}</td>
+                                    <td>{vacation.vacation_end_date}</td>
+                                </tr>
+
+                            )
+
+                        })}
+                    </tbody>
+                </Table>
+            </Row>
             </Col>
             <Col  className="button">
             
                 <ButtonGroup className="buttonGroup">
-                    <Button onClick={() => handleClick(data.username)}>Delete Employee</Button>
+                    <Button onClick={() => handleClick(employeeWorkSchedule.username)}>Delete Employee</Button>
                 </ButtonGroup>
                 <ButtonGroup>
                     <Button onClick={()=>{navigate("../Owner/Home")} }> Return </Button>
@@ -75,4 +101,4 @@ const EmployeeHome = (props) => {
 
 }
 
-export default EmployeeHome;
+export default EmployeeDetails;

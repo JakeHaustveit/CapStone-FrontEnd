@@ -2,7 +2,6 @@ import React, {useState} from "react";
 import Form from 'react-bootstrap/Form';
 import Modal from "react-modal";
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
-import useForm from '../UseForm/UseForm';
 import Button from 'react-bootstrap/Button';
 
 export default function ({isOpen, onClose, onEventAdded, handleEventAdd}) {
