@@ -41,6 +41,9 @@ const UserLogin = (props) => {
         <div  className="Form">
           <Container>
             <Row>
+            <Col md={2}>
+                </Col>
+              <Col md={8}>
               <h3> Log in Here </h3>
         <Form  onSubmit= {handleSubmit}>
                 <Form.Group  >
@@ -60,6 +63,7 @@ const UserLogin = (props) => {
                   Submit
                 </Button>
             </Form>
+            </Col>
             </Row>
             </Container>
         </div>

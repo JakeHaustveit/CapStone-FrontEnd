@@ -10,10 +10,16 @@ import OwnerHome from './components/OwnerHome/OwnerHome';
 import axios from 'axios';
 import Calendar from './components/Calendar/Calendar';
 import EmployeeDetails from './components/EmployeeDetails/EmployeeDetails';
+import Modal from 'react-modal'
 
 
 
 
+
+
+
+
+Modal.setAppElement('#root')
 
 
 
@@ -54,6 +60,9 @@ function App() {
   //
   // For Owners
   //
+  //Redux
+
+ 
 
 
  // Gets all jobs for employee
@@ -134,7 +143,7 @@ function App() {
     <div>   
         <NavBar logOutUser={logOut} />
         <Routes>
-          <Route path="/Calendar" element={ <Calendar listOfJobs={allJobs} />} />        
+          <Route path="/Calendar" element={ <Calendar user={userInfo} jobs={allJobs}/>} />        
           <Route path="/" element= {<HomeScreen /> } />
           <Route path="/Registration" element= {<UserRegistration /> } />
           <Route path="/Login" element= {<UserLogin userData={setUserInfo}/> } />              

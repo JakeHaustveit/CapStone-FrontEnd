@@ -1,8 +1,9 @@
 import React from "react";
-import { Col, Row, Container } from "react-bootstrap";
+import { Col, Row, Container, ButtonGroup, ButtonToolbar } from "react-bootstrap";
 import Button from 'react-bootstrap/Button';
 import { useNavigate } from 'react-router-dom';
 import Table from "react-bootstrap/Table";
+import './EmployeeDetails.css'
 
 
 
@@ -22,11 +23,12 @@ const EmployeeHome = (props) => {
 
     return(
         <div>
-            <Container>
-            <h3>{}Employee Name</h3>
-            
-            
-            <Table>
+            <Container >
+                <Col className="Employee"><h3>Employee Name</h3>
+                 
+            </Col> 
+            <Col  className="button">
+            <Table bordered hover>
                 <thead>
                     <tr>
                     <td>Day Worked</td>
@@ -45,7 +47,7 @@ const EmployeeHome = (props) => {
                         <td>{employee.start_time}</td>
                         <td>{employee.end_time}</td>
                         <td>{employee.labor_code}</td>
-                        <td><Button onClick={() => handleClick(employee.username)}>Delete Employee</Button> </td>
+                        
                                                       
                       </tr>                             
                       
@@ -53,7 +55,19 @@ const EmployeeHome = (props) => {
                          })}
                 </tbody>
             </Table>
-            <Button onClick={()=>{navigate("../Owner/Home")} }> Return </Button>
+            </Col>
+            <Col  className="button">
+            
+                <ButtonGroup className="buttonGroup">
+                    <Button onClick={() => handleClick(data.username)}>Delete Employee</Button>
+                </ButtonGroup>
+                <ButtonGroup>
+                    <Button onClick={()=>{navigate("../Owner/Home")} }> Return </Button>
+                </ButtonGroup>
+            
+
+            </Col>
+            
             </Container>
         </div>
         

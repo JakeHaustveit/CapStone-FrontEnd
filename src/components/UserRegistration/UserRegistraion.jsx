@@ -59,7 +59,7 @@ const UserRegistration = (props) => {
                   </Form.Group>
 
                   <Form.Group className="mb-3" controlId="floatingPassword">
-                    <FloatingLabel label="">Password
+                    <FloatingLabel label="">
                     <Form.Control type="password" name="password" onChange= {handleChange} required= {true}/>
                     </FloatingLabel>
                   </Form.Group>

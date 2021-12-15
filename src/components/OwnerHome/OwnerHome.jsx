@@ -99,7 +99,7 @@ const OwnerHome = (props) => {
                 </Col>                
                 <Col>
                 <h5> Employee Data </h5> 
-                   <Table>
+                   <Table bordered hover>
                        <thead>
                            <tr>
                                <td>User Name</td>
@@ -116,7 +116,7 @@ const OwnerHome = (props) => {
                                <td>{employee.username}</td>
                                <td>{employee.first_name}</td>
                                <td>{employee.last_name}</td>
-                               <td><button onClick={() => viewEmployee(employee.username)}>View Employee Time Sheet</button> </td>                                                             
+                               <td><Button onClick={() => viewEmployee(employee.username)}>Employee Time Sheet</Button> </td>                                                             
                              </tr>
                            );
                         })}
