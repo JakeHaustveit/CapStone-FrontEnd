@@ -87,7 +87,7 @@ const EmployeeDetails = (props) => {
             <Col className="col-md-3 mx-auto">
             
                 <Stack gap= {2} className="buttonGroup">
-                    <Button onClick={() => handleClick(employeeWorkSchedule.username)}>Delete Employee</Button>
+                    <Button onClick={() => handleClick(employeeWorkSchedule[0].username)}>Delete Employee</Button>
                 
                     <Button onClick={()=>{navigate("../Owner/Home")} }> Return </Button>
                 </Stack>

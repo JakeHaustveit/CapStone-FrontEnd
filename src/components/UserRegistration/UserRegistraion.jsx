@@ -45,7 +45,7 @@ const UserRegistration = (props) => {
     function renderOwnerRegistration(){
       return (
           <div>
-            <Container>
+            <Container className = "center">
               <Row>
             <Col md={2}>
                 </Col>
@@ -59,8 +59,8 @@ const UserRegistration = (props) => {
 
                   </Form.Group>
 
-                  <Form.Group className="mb-3" controlId="floatingPassword">
-                    <FloatingLabel label="">
+                  <Form.Group >
+                    <FloatingLabel className="mb-3"  label="Password" controlId="floatingPassword">
                     <Form.Control type="password" name="password" onChange= {handleChange} required= {true}/>
                     </FloatingLabel>
                   </Form.Group>
@@ -124,7 +124,7 @@ const UserRegistration = (props) => {
     function RenderEmployeeRegistration(){
       return (
         <div>
-          <Container>
+          <Container  className = "center">
           <Row>
             <Col md={2}>
               </Col>
@@ -137,8 +137,8 @@ const UserRegistration = (props) => {
 
                 </Form.Group>
 
-                <Form.Group className="mb-3" controlId="floatingPassword">
-                  <FloatingLabel label="">Password
+                <Form.Group >
+                  <FloatingLabel className="mb-3"  label="Password" controlId="floatingPassword">
                   <Form.Control type="password" name="password" placeholder="Password" onChange= {handleChange} required= {true}/>
                   </FloatingLabel>
                 </Form.Group>
