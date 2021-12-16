@@ -46,7 +46,7 @@ const EmployeeHome = (props) => {
                 </Col>
                 <Col md={4}>
                     
-                    <h3>Time Card</h3>
+                    <h4>Time Card</h4>
                     <Form onSubmit= {handleSubmit}>
                     <Form.Group >
                         <FloatingLabel label="User Name" className="mb-3" controlId="floatingTextarea">
@@ -74,7 +74,7 @@ const EmployeeHome = (props) => {
                         </FloatingLabel>
                     </Form.Group>
                     <Form.Group>
-                        <FloatingLabel controlId="floatingSelect" label="Select Status" >
+                        <FloatingLabel controlId="floatingSelect" className="mb-3" label="Select Status" >
                             <Form.Select  type="test" name="labor_code" onChange= {handleChange} required= {true}>
                                 <option>Select Job Code Here</option>
                                 {props.employeeJobs.map((job) =>{
@@ -100,7 +100,7 @@ const EmployeeHome = (props) => {
                     
                     </Col>
                     <Col md={4}>
-                        <h3> Request Time Off Here</h3>
+                        <h4> Request Time Off Here</h4>
                     <Form onSubmit= {handleSubmit2}>
                     <Form.Group >
                         <FloatingLabel label="User Name" className="mb-3" controlId="floatingTextarea">

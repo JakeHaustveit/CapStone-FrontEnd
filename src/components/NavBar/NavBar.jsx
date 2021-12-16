@@ -10,10 +10,10 @@ const NavBar = (props) => {
         <div>                
             <nav className='topNav' >
             <Link to="/" >Home</Link>                
-            <Link to="/Registration">User Registration</Link>
-            <Link to="/Login" >Login Here</Link>
+            <Link to="/Registration">Register</Link>
+            <Link to="/Login" >Login</Link>
             <Link to="/Calendar" > Calendar </Link>
-            <Link to="/" onClick={() =>{props.logOutUser() }}>Logout Here</Link>          
+            <Link to="/" onClick={() =>{props.logOutUser() }}>Logout</Link>          
             </nav>
         </div>
     )
