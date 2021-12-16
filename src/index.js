@@ -14,7 +14,7 @@ ReactDOM.render(
   
     <Router>
     <React.StrictMode>
-      <App />
+      <App className="color"/>
     </React.StrictMode>
   </Router>,
   

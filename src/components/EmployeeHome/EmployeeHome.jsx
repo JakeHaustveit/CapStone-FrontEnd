@@ -38,7 +38,7 @@ const EmployeeHome = (props) => {
 
     return ( 
         
-        <div>
+        <div className = "center">
             <h3> Welcome, {props.loggedInUser.first_name} {props.loggedInUser.last_name}</h3> 
             <Container>
             <Row>

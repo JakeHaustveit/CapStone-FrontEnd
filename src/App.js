@@ -140,8 +140,7 @@ function App() {
 
   const logOut = ()=>{
     
-    setUserInfo({})
-    setEmployeeJobList({})
+    setUserInfo({})    
     setAllEmployees({})
     setAllJobs({})
     setEmployeeInfo({})
@@ -155,7 +154,7 @@ function App() {
   
 
   return (
-    <div>   
+    <div className='App'>   
         <NavBar logOutUser={logOut} />
         <Routes>
           <Route path="/Calendar" element={ <Calendar user={userInfo} jobs={allJobs}/>} />        
