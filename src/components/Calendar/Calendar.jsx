@@ -11,6 +11,7 @@ import { useNavigate } from 'react-router-dom'
 export default function(props){
   const[modalOpen, setModalOpen]= useState("")
   const[jobEvents, setJobEvents] = useState([])
+  const[vacationEvents, setVacationEvents]= useState([])
   const calendarRef = useRef(null) 
   const [toggle, setToggle] = useState(false)
 
@@ -19,10 +20,10 @@ export default function(props){
   const onEventAdded = (event) => {
     let calendarApi = calendarRef.current.getApi()
     calendarApi.addEvent( {
-      title: event.title || event.job_name,
+      title: event.title || event.job_name || event.username,
       description: event.description || event.job_site,            
-      start: event.start || event.job_start_date,
-      end: event.end || event.job_end_date
+      start: event.start || event.job_start_date || event.vacation_start_date, 
+      end: event.end || event.job_end_date || event.vacation_end_date
     })
   }
 
@@ -55,6 +56,7 @@ export default function(props){
  
   useEffect(()=>{
       handleDatesSet()
+      vacationEventsAdd()
     },[toggle])
   
 
@@ -66,8 +68,22 @@ export default function(props){
         
   }
 
+
+  async function vacationEventsAdd(){
+
+    const jwt = localStorage.getItem('token');
+
+    let response = await axios.get("http://127.0.0.1:8000/employees/vacation/", { headers: {Authorization: 'Bearer ' + jwt}})
+    renderEventContent(response.data)
+    setVacationEvents(response.data)
+    
+
+  }
+
+  //renderEventContent(props.employeeVacation)
+
   async function handleDatesSet() {
-    console.log(props)
+    
     var business_name
  
     if(props.user.is_staff=== true){
@@ -106,7 +122,8 @@ export default function(props){
           events={jobEvents}
           plugins={[ dayGridPlugin]}
           initialView= 'dayGridMonth'            
-          eventAdd={(event) => handleEventAdd(event)}  
+          eventAdd={(event) => handleEventAdd(event)}
+          
           />
         </div>
         <AddEventModal isOpen={modalOpen} onClose={() => setModalOpen(false)} onEventAdded={(event)=> onEventAdded(event)} handleEventAdd = {handleEventAdd} />

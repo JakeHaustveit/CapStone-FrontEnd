@@ -43,6 +43,7 @@ function App() {
     getAllEmployees()
     getAllJobs()
     setLoadData()
+    viewEmployeeVacation()
     
   } ,[userInfo])
 
@@ -123,7 +124,7 @@ function App() {
 
     const jwt = localStorage.getItem('token');
 
-    let response = await axios.get(`http://127.0.0.1:8000/employees/employee/${employee}/`, { headers: {Authorization: 'Bearer ' + jwt}})
+    let response = await axios.get("http://127.0.0.1:8000/employees/vacation/", { headers: {Authorization: 'Bearer ' + jwt}})
     console.log(response.data)
     setEmployeeVacationDate(response.data)
 
@@ -157,7 +158,7 @@ function App() {
     <div className='App'>   
         <NavBar logOutUser={logOut} />
         <Routes>
-          <Route path="/Calendar" element={ <Calendar user={userInfo} jobs={allJobs}/>} />        
+          <Route path="/Calendar" element={ <Calendar user={userInfo} jobs={allJobs} employeeVacation={employeeVacationDate}/>} />        
           <Route path="/" element= {<HomeScreen /> } />
           <Route path="/Registration" element= {<UserRegistration /> } />
           <Route path="/Login" element= {<UserLogin userData={setUserInfo}/> } />              
