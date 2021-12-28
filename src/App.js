@@ -34,6 +34,7 @@ function App() {
   const [employeeInfo, setEmployeeInfo] = useState('')
   const [loadData, setLoadData]= useState(false)
   const [employeeVacationDate, setEmployeeVacationDate]= useState("")
+  const [allEmployeeVacationDate, setAllEmployeeVacationDate]= useState("")
 
 
   // Use Effects
@@ -43,7 +44,7 @@ function App() {
     getAllEmployees()
     getAllJobs()
     setLoadData()
-    viewEmployeeVacation()
+    viewAllEmployeeVacation()
     
   } ,[userInfo])
 
@@ -120,11 +121,21 @@ function App() {
 
   }
 
-  const viewEmployeeVacation = async (employee) => {
+  const viewAllEmployeeVacation = async (employee) => {
 
     const jwt = localStorage.getItem('token');
 
     let response = await axios.get("http://127.0.0.1:8000/employees/vacation/", { headers: {Authorization: 'Bearer ' + jwt}})
+    console.log(response.data)
+    setAllEmployeeVacationDate(response.data)
+
+  }
+
+  const viewEmployeeVacation = async (employee) => {
+
+    const jwt = localStorage.getItem('token');
+
+    let response = await axios.get(`http://127.0.0.1:8000/employees/employee/${employee}/`, { headers: {Authorization: 'Bearer ' + jwt}})
     console.log(response.data)
     setEmployeeVacationDate(response.data)
 
@@ -158,7 +169,7 @@ function App() {
     <div className='App'>   
         <NavBar logOutUser={logOut} />
         <Routes>
-          <Route path="/Calendar" element={ <Calendar user={userInfo} jobs={allJobs} employeeVacation={employeeVacationDate}/>} />        
+          <Route path="/Calendar" element={ <Calendar user={userInfo} jobs={allJobs} employeeVacation={allEmployeeVacationDate}/>} />        
           <Route path="/" element= {<HomeScreen /> } />
           <Route path="/Registration" element= {<UserRegistration /> } />
           <Route path="/Login" element= {<UserLogin userData={setUserInfo}/> } />              
